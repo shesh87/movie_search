@@ -15,11 +15,18 @@ def search_movies(word)
 	return search.movies
 end
 
-def posters(array)
-	array[1..9].map do |movie|
+def posters?(array)
+	array[0..20].select do |movie|
+		movie.poster != nil
+	end
+end
+
+def posters!(array)
+	array.map do |movie|
 		movie.poster
 	end
 end
+
 
 
 get "/" do
@@ -28,9 +35,11 @@ end
 
 post "/search" do
 	word = params[:search_word]
-	results = search_movies(word)
-	posters = posters(results)
-	session[:posters] = posters
+	search_results = search_movies(word)
+	posters_yes = posters?(search_results) #returns array of movies that have posters
+	got_posters = posters!(posters_yes)
+
+	session[:posters] = got_posters[0..8]
 	# binding.pry
 	redirect to("/movies")
 end

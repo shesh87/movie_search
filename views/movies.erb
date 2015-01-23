@@ -1,24 +1,30 @@
 
 <html>
 <head><title>Movie Searcher</title>
-<style></style>
+<style>
+	#main {margin: 0 auto;}
+	h1 {text-align: center;}
+	h2 {text-align: center;}
+	li {list-style-type: none; margin: 10px;}
+	ul {overflow: hidden; margin: 0; padding: 0;}
+</style>
 </head>
 <body>
 
-<h1>Movie Search</h1>
+<div id = "main">
+	<h1>Movie Search</h1>
+	<h2>Which one of these movies was filmed in 1975?</h2>
 
-<ul>
-	<% @posters.each do |img| %>	<!-- this creates a new li for each in the array -->
-		<li><img src=<%= img %> onclick="alert('Oh no You did not say the magic words')" style="width: 200px;"></li>
-	<% end %>
-
-</ul>
-
-
-
+	<ul>
+		<% @posters.each do |img| %>	<!-- this creates a new li for each in the array -->
+			<li><img src=<%= img %> onclick="alert('Oh no You did not say the magic words')" style="width: 200px;"></li>
+		<% end %>
+	</ul>
 
 
 
+
+</div>
 
 
 
