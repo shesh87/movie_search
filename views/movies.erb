@@ -1,1 +1,26 @@
-<%= session[:results] %>
+
+<html>
+<head><title>Movie Searcher</title>
+<style></style>
+</head>
+<body>
+
+<h1>Movie Search</h1>
+
+<ul>
+	<% @posters.each do |img| %>	<!-- this creates a new li for each in the array -->
+		<li><img src=<%= img %> onclick="alert('Oh no You did not say the magic words')" style="width: 200px;"></li>
+	<% end %>
+
+</ul>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

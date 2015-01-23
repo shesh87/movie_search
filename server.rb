@@ -5,6 +5,8 @@ require "sinatra/reloader" if development?
 require "logger"
 enable :logger
 require "imdb"
+enable :sessions
+
 
 results = []
 
@@ -13,22 +15,29 @@ def search_movies(word)
 	return search.movies
 end
 
-# search = Imdb::Search.new(“mr.deeds”)
+def posters(array)
+	array[1..9].map do |movie|
+		movie.poster
+	end
+end
+
 
 get "/" do
 	erb :index
 end
 
-
 post "/search" do
 	word = params[:search_word]
-	results << search_movies(word)
-	# session[:results] = results
-
-	binding.pry
+	results = search_movies(word)
+	posters = posters(results)
+	session[:posters] = posters
+	# binding.pry
 	redirect to("/movies")
 end
 
 get "/movies" do
+	@posters = session[:posters]
 	erb :movies
 end
+
+
