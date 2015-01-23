@@ -22,9 +22,13 @@ def posters?(array)
 end
 
 def posters!(array)
-	array.map do |movie|
+	session[:nine] = array.map do |movie|
 		movie.poster
 	end
+
+	# if session[:nine].length < 9
+	# 	return "Sorry"
+	# end
 end
 
 
@@ -38,7 +42,7 @@ post "/search" do
 	search_results = search_movies(word)
 	posters_yes = posters?(search_results) #returns array of movies that have posters
 	got_posters = posters!(posters_yes)
-
+	# binding.pry
 	session[:posters] = got_posters[0..8]
 	# binding.pry
 	redirect to("/movies")
