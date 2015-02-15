@@ -6,7 +6,6 @@ gem 'sinatra-contrib'
 gem 'logger'
 
 gem 'imdb'
-gem 'racksh'
 gem 'awesome_print'
 gem 'rspec'
 
