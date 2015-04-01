@@ -1,7 +1,7 @@
 <h1><%= @message %></h1>
 
 	<h1>Movie Search</h1>
-	<h2>Which one of these movies was filmed in 1975?</h2>
+	<h2>Which one of these movies was released in <%=@year%>?</h2>
 
 	<ul class="inline">
 		<% @posters.each do |img| %>	<!-- this creates a new li for each in the array -->
