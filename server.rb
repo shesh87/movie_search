@@ -63,7 +63,7 @@ post "/search" do
 	session[:movies] = movies_9
 	session[:posters] = get_posters(movies_9)
 	
-	binding.pry
+	# binding.pry
 	session[:year] = get_year(movies_9)
 
 	binding.pry
@@ -72,8 +72,11 @@ end
 
 get "/movies" do
 	@posters = session[:posters]
+	binding.pry
 	@year = session[:year]
+	binding.pry
 	@movies = session[:movies]
+	binding.pry
 	erb :movies
 end
 
