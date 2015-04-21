@@ -1,14 +1,23 @@
-<h1><%= @message %></h1>
 
-	<h1>Movie Search</h1>
-	<h2>Which one of these movies was released in <%=@year%>?</h2>
+<header><h1>Movie Search Quiz</h1></header>
+
+<main>
+	<h2 class="test" data-year="<%=@year%>">Which one of these movies was released in <%=@year%>?</h2>
 
 	<ul class="inline">
-		<% @posters.each do |img| %>	<!-- this creates a new li for each in the array -->
+		<!--<% @posters.each do |img| %>
 			<li class="inline-movies"><img src=<%= img %>></li>
+		<% end %>-->
+		<% @movies.each do |movie| %>
+			<li class="inline-movies <%= movie.year %>"><img src=<%= movie.poster %>></li>
 		<% end %>
 	</ul>
+</main>
 
 
 
-
+<script type="text/javascript">
+$('.inline-movies').on('click', function() {
+	if 
+});
+</script>

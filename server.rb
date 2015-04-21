@@ -13,28 +13,6 @@ def search_movies(word)
 	return search.movies#[0..20]
 end
 
-def get_posters(array)
-	posters = array.map do |movie|
-		movie.poster
-	end
-	return posters
-end
-
-def get_year(array)
-	year = []
-	array.each do |movie|
-		movie.year >> year
-	end
-	return year.sample
-end
-
-# def year?(array)
-# 	year = array.map do |movie|
-# 		movie.year
-# 	end
-# 	session[:year] = year.sample
-# end
-
 def movie_properties(array)
 	# posters = []
 	good_movies = []
@@ -48,6 +26,28 @@ def movie_properties(array)
 	return good_movies[0..8]
 end
 
+def get_posters(array)
+	posters = array.map do |movie|
+		movie.poster
+	end
+	return posters
+end
+
+def get_year(array)
+	year = []
+	array.each do |movie|
+		year << movie.year
+	end
+	return year.sample
+end
+
+# def year?(array)
+# 	year = array.map do |movie|
+# 		movie.year
+# 	end
+# 	session[:year] = year.sample
+# end
+
 
 ################################################################
 
@@ -59,10 +59,11 @@ end
 
 post "/search" do
 	search_results = search_movies(params[:search_word])
-	# binding.pry
-	# session[:posters] = movie_properties(search_results)[0..8]
 	movies_9 = movie_properties(search_results)
+	session[:movies] = movies_9
 	session[:posters] = get_posters(movies_9)
+	
+	binding.pry
 	session[:year] = get_year(movies_9)
 
 	binding.pry
@@ -72,6 +73,7 @@ end
 get "/movies" do
 	@posters = session[:posters]
 	@year = session[:year]
+	@movies = session[:movies]
 	erb :movies
 end
 
