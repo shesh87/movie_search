@@ -8,40 +8,44 @@ require "imdb"
 enable :sessions
 
 
-results = []
-
 def search_movies(word)
-	search[0..20] = Imdb::Search.new(word)
+	search = Imdb::Search.new(word)
 	return search.movies#[0..20]
 end
 
-def posters?(array)
-	array[0..20].select do |movie|
-		movie.poster != nil
-	end
-end
-
-def posters!(array)
-	array.map do |movie|
+def get_posters(array)
+	posters = array.map do |movie|
 		movie.poster
 	end
+	return posters
 end
 
-def year?(array)
-	year = array.map do |movie|
-		movie.year
+def get_year(array)
+	year = []
+	array.each do |movie|
+		movie.year >> year
 	end
-	session[:year] = year.sample
+	return year.sample
 end
+
+# def year?(array)
+# 	year = array.map do |movie|
+# 		movie.year
+# 	end
+# 	session[:year] = year.sample
+# end
 
 def movie_properties(array)
-	posters = []
+	# posters = []
+	good_movies = []
 	array.each do |object|
 		if object.poster != nil
-			posters << object.poster 
+			# posters << object.poster
+			good_movies << object 
 		end
 	end
-	return posters
+	# return posters
+	return good_movies[0..8]
 end
 
 
@@ -55,17 +59,13 @@ end
 
 post "/search" do
 	search_results = search_movies(params[:search_word])
+	# binding.pry
+	# session[:posters] = movie_properties(search_results)[0..8]
+	movies_9 = movie_properties(search_results)
+	session[:posters] = get_posters(movies_9)
+	session[:year] = get_year(movies_9)
+
 	binding.pry
-	# binding.pry
-	session[:posters] = movie_properties(search_results)[0..8]
-	# binding.pry
-	# posters_yes = posters?(search_results) #returns array of movies that have posters
-	
-	# got_posters = posters!(posters_yes)
-
-
-	# session[:posters] = got_posters[0..8]
-	# session[:year] = year?(posters_yes)
 	redirect to("/movies")
 end
 
@@ -78,104 +78,6 @@ end
 
 
 
-
-
-
-
-
-
-
-
-#TESTING NEW STRATEGY
-
-
-
-# require "sinatra"
-# require "pry"
-# require "sinatra/reloader" if development?
-# require "logger"
-# enable :logger
-# require "imdb"
-# enable :sessions
-
-
-# class MovieSearch
-# 	attr_accessor :movies
-	
-
-# 	def search_imdb(word)
-# 		imdb = Imdb::Search.new(word)
-# 		@movies = imdb.movies[0..20]
-# 	end
-
-# 	def posters
-# 		@movies.map do |movie|
-# 			movie.poster
-# 		end
-# 		# yes.map { |movie| movie.poster }
-# 	end
-
-# 	def get_posters(array)
-# 		session[:yes] = array.map do |movie|
-# 			movie.poster
-# 		end
-# 	end
-
-
-
-# 	# def posters?(array)
-# 	# 	array[0..20].map do |movie|
-# 	# 		movie.poster != nil
-# 	# 	end
-# 	# 	# session[:nine] = posters.map do |movie|
-# 	# 	# 	movie.poster
-# 	# 	# end
-# 	# end
-
-# 	# def posters!(array)
-# 	# 	session[:nine] = array.map do |movie|
-# 	# 		movie.poster
-# 	# 	end
-# 	# end
-
-# 	def year?(array)
-# 		year = array.map do |movie|
-# 			movie.year
-# 		end
-# 		session[:year] = year.sample
-# 	end
-
-# end
-
-
-# ################################################################
-
-
-
-# get "/" do
-# 	erb :index
-# end
-
-# post "/search" do
-# 	search = MovieSearch.new
-# 	search.search_imdb(params[:search_word])
-# 	session[:movies] = search.posters
-# 	# posters_true = search.posters
-# 	# session[:posters] = search.get_posters(posters_true)
-# 	# binding.pry
-
-# 	# session[:year] = search.year?(@movies)
-
-# 	redirect to("/movies")
-# end
-
-# get "/movies" do
-# 	@posters = session[:posters]
-# 	@movies = session[:movies]
-# 	# binding.pry
-# 	@year = session[:year]
-# 	erb :movies
-# end
 
 
 
