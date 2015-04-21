@@ -14,15 +14,12 @@ def search_movies(word)
 end
 
 def movie_properties(array)
-	# posters = []
 	good_movies = []
 	array.each do |object|
 		if object.poster != nil
-			# posters << object.poster
 			good_movies << object 
 		end
 	end
-	# return posters
 	return good_movies[0..8]
 end
 
@@ -41,12 +38,6 @@ def get_year(array)
 	return year.sample
 end
 
-# def year?(array)
-# 	year = array.map do |movie|
-# 		movie.year
-# 	end
-# 	session[:year] = year.sample
-# end
 
 
 ################################################################
@@ -75,8 +66,8 @@ get "/movies" do
 	binding.pry
 	@year = session[:year]
 	binding.pry
-	@movies = session[:movies]
-	binding.pry
+	# @movies = session[:movies]
+	# binding.pry
 	erb :movies
 end
 

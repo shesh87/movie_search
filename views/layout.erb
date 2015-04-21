@@ -4,17 +4,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1">
 	<title>IMDB Movie Quiz</title>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	
 
 
+<div class="container-fluid">
+	<header>
+		<h1>Movie Search Quiz</h1>
+	</header>
+	
+	<main>
+		<%= yield %>
+	</main>
 
-<div class="container">
-	<%= yield %>
+	<footer class="row">
+		<div class="col-sm-12 footer">
+			<p>Copyright 2015</p>
+		</div>
+	</footer>
 </div>
 
 
