@@ -10,7 +10,7 @@ enable :sessions
 
 def search_movies(word)
 	search = Imdb::Search.new(word)
-	return search.movies#[0..20]
+	return search.movies[0..20]
 end
 
 def movie_properties(array)
@@ -56,25 +56,22 @@ get "/" do
 end
 
 post "/search" do
-	search_results = search_movies(params[:search_word])
+	session[:search_results] = search_movies(params[:search_word])
+	# movies_9 = movie_properties(search_results)
+	# session[:posters] = get_posters(movies_9)
+	# posters = get_posters(movies_9)
 	# binding.pry
-	movies_9 = movie_properties(search_results)
-	# binding.pry
-	# session[:movies] = movies_9
-	# puts movies_9.instance_of?
-	session[:posters] = get_posters(movies_9)
-	binding.pry
 	# session[:year] = get_year(movies_9)
 
-	# binding.pry
+	binding.pry
 	redirect to("/movies")
 end
 
 get "/movies" do
 	@greeting = "HELLO"
-	@posters = session[:posters]
-	# @year = session[:year]
-	# @movies = session[:movies]
+	results = session[:search_results]
+	@year = get_year(results)
+	@movies = movie_properties(results)
 	erb :movies
 end
 
