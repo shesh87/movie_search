@@ -8,34 +8,49 @@ require "imdb"
 enable :sessions
 
 
-def search_movies(word)
-	search = Imdb::Search.new(word)
-	return search.movies#[0..20]
-end
+class IMDBSearch
+# attr_accessor :results, :cheese
 
-def movie_properties(array)
-	good_movies = []
-	array.each do |object|
-		if object.poster != nil
-			good_movies << object 
+	@@results = []
+	# @cheese = "cheese"
+
+	def show
+		@@results
+	end
+
+	def search_movies(word)
+		search = Imdb::Search.new(word)
+		# return search.movies[0..15]
+		# @@results << search.movies[0...15]
+		@@results << "123"
+		# return @@results
+	end
+
+	def movie_properties(array)
+		good_movies = []
+		array.each do |object|
+			if object.poster != nil
+				good_movies << object 
+			end
 		end
+		return good_movies[0..8]
 	end
-	return good_movies[0..8]
-end
 
-def get_posters(array)
-	posters = array.map do |movie|
-		movie.poster
+	def get_posters(array)
+		posters = array.map do |movie|
+			movie.poster
+		end
+		return posters
 	end
-	return posters
-end
 
-def get_year(array)
-	year = []
-	array.each do |movie|
-		year << movie.year
+	def get_year(array)
+		year = []
+		array.each do |movie|
+			year << movie.year
+		end
+		return year.sample
 	end
-	return year.sample
+
 end
 
 
@@ -49,23 +64,22 @@ get "/" do
 end
 
 post "/search" do
-	search_results = search_movies(params[:search_word])
-	movies_9 = movie_properties(search_results[0..19])
-	session[:movies] = movies_9
-	# session[:posters] = get_posters(movies_9)
-	
-	# binding.pry
-	# session[:year] = get_year(movies_9)
+	session[:quiz] = IMDBSearch.new
+	session[:quiz].search_movies(params[:search_word])
+	binding.pry
 
-	# binding.pry
+	
 	redirect to("/movies")
 end
 
 get "/movies" do
-	# @movies = session[:movies]
-	# binding.pry
-	# @year = get_year(@movies)
-	# binding.pry
+	@greeting = "HELLO"
+	hi = session[:quiz]
+	# quiz2 = IMDBSearch.new
+	binding.pry
+	# @movies = quiz2.movie_properties(quiz2.results)
+
+	
 	erb :movies
 end
 
@@ -73,7 +87,35 @@ end
 
 
 
+# def search_movies(word)
+# 	search = Imdb::Search.new(word)
+# 	return search.movies[0..15]
+# end
 
+# def movie_properties(array)
+# 	good_movies = []
+# 	array.each do |object|
+# 		if object.poster != nil
+# 			good_movies << object 
+# 		end
+# 	end
+# 	return good_movies[0..8]
+# end
+
+# def get_posters(array)
+# 	posters = array.map do |movie|
+# 		movie.poster
+# 	end
+# 	return posters
+# end
+
+# def get_year(array)
+# 	year = []
+# 	array.each do |movie|
+# 		year << movie.year
+# 	end
+# 	return year.sample
+# end
 
 
 
