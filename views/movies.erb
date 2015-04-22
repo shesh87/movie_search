@@ -1,3 +1,4 @@
+<h2><%= @greeting %></h2>
 
 <header><h1>Movie Search Quiz</h1></header>
 
@@ -5,9 +6,7 @@
 	<h2 class="test" data-year="<%=@year%>">Which one of these movies was released in <%=@year%>?</h2>
 
 	<ul class="inline">
-		<!--<% @posters.each do |img| %>
-			<li class="inline-movies"><img src=<%= img %>></li>
-		<% end %>-->
+
 		<% @movies.each do |movie| %>
 			<li class="inline-movies <%= movie.year %>"><img src=<%= movie.poster %>></li>
 		<% end %>

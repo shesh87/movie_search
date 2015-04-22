@@ -14,16 +14,14 @@ def search_movies(word)
 end
 
 def movie_properties(array)
-	# posters = []
 	good_movies = []
 	array.each do |object|
 		if object.poster != nil
-			# posters << object.poster
-			good_movies << object 
+			good_movies << object
+			break if good_movies.count == 9
 		end
 	end
-	# return posters
-	return good_movies[0..8]
+	return good_movies
 end
 
 def get_posters(array)
@@ -59,14 +57,13 @@ end
 
 post "/search" do
 	search_results = search_movies(params[:search_word])
-	binding.pry
-	movies_9 = movie_properties(search_results)
-	binding.pry
-	# session[:movies] = movies_9
-	puts movies_9.instance_of?
-	session[:posters] = get_posters(movies_9)
-	
 	# binding.pry
+	movies_9 = movie_properties(search_results)
+	# binding.pry
+	# session[:movies] = movies_9
+	# puts movies_9.instance_of?
+	session[:posters] = get_posters(movies_9)
+	binding.pry
 	# session[:year] = get_year(movies_9)
 
 	# binding.pry
@@ -74,7 +71,8 @@ post "/search" do
 end
 
 get "/movies" do
-	# @posters = session[:posters]
+	@greeting = "HELLO"
+	@posters = session[:posters]
 	# @year = session[:year]
 	# @movies = session[:movies]
 	erb :movies
