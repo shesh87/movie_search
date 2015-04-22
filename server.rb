@@ -12,28 +12,28 @@ class IMDBSearch
 # attr_accessor :results, :cheese
 
 	@@results = []
-	# @cheese = "cheese"
 
 	def show
-		@@results
+		@@results[0..8]
 	end
 
 	def search_movies(word)
 		search = Imdb::Search.new(word)
-		# return search.movies[0..15]
-		# @@results << search.movies[0...15]
-		@@results << "123"
+		return search.movies[0...15]
+		# @@results << search.movies
+		# @@results << "123"
 		# return @@results
 	end
 
 	def movie_properties(array)
-		good_movies = []
+		# good_movies = []
 		array.each do |object|
 			if object.poster != nil
-				good_movies << object 
+				@@results << object
+				# break if @@results == 9 
 			end
 		end
-		return good_movies[0..8]
+		# return good_movies[0..8]
 	end
 
 	def get_posters(array)
@@ -45,6 +45,7 @@ class IMDBSearch
 
 	def get_year(array)
 		year = []
+		puts array
 		array.each do |movie|
 			year << movie.year
 		end
@@ -65,7 +66,8 @@ end
 
 post "/search" do
 	session[:quiz] = IMDBSearch.new
-	session[:quiz].search_movies(params[:search_word])
+	results = session[:quiz].search_movies(params[:search_word])
+	session[:quiz].movie_properties(results)
 	binding.pry
 
 	
@@ -74,48 +76,15 @@ end
 
 get "/movies" do
 	@greeting = "HELLO"
-	hi = session[:quiz]
-	# quiz2 = IMDBSearch.new
+	@movies = session[:quiz].show
+	binding.pry
+	# @year = session[:quiz].get_year(@movies)
 	binding.pry
 	# @movies = quiz2.movie_properties(quiz2.results)
 
 	
 	erb :movies
 end
-
-
-
-
-
-# def search_movies(word)
-# 	search = Imdb::Search.new(word)
-# 	return search.movies[0..15]
-# end
-
-# def movie_properties(array)
-# 	good_movies = []
-# 	array.each do |object|
-# 		if object.poster != nil
-# 			good_movies << object 
-# 		end
-# 	end
-# 	return good_movies[0..8]
-# end
-
-# def get_posters(array)
-# 	posters = array.map do |movie|
-# 		movie.poster
-# 	end
-# 	return posters
-# end
-
-# def get_year(array)
-# 	year = []
-# 	array.each do |movie|
-# 		year << movie.year
-# 	end
-# 	return year.sample
-# end
 
 
 
