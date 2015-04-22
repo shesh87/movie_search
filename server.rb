@@ -50,23 +50,21 @@ end
 
 post "/search" do
 	search_results = search_movies(params[:search_word])
-	movies_9 = movie_properties(search_results)
+	movies_9 = movie_properties(search_results[0..19])
 	session[:movies] = movies_9
-	session[:posters] = get_posters(movies_9)
+	# session[:posters] = get_posters(movies_9)
 	
 	# binding.pry
-	session[:year] = get_year(movies_9)
+	# session[:year] = get_year(movies_9)
 
-	binding.pry
+	# binding.pry
 	redirect to("/movies")
 end
 
 get "/movies" do
-	@posters = session[:posters]
-	binding.pry
-	@year = session[:year]
-	binding.pry
 	# @movies = session[:movies]
+	# binding.pry
+	# @year = get_year(@movies)
 	# binding.pry
 	erb :movies
 end
