@@ -1,10 +1,11 @@
 
-<h3><%= @greeting %></h3>
-<h2 class="title" data-year="<%=@year%>">Which one of these movies was released in ?</h2>
+<h2 class="title" data-year="<%=@year%>">
+	Which one of these movies was released in <%=@year%>?
+</h2>
 
-<ul class="inline">
+<ul class="list-inline line">
 	<% @movies.each do |movie| %>
-		<li class="inline-movies js-movies col-sm-3" id="js-<%= movie.year %>">
+		<li class="inline-movies js-movies" id="js-<%= movie.year %>">
 			<img src=<%= movie.poster %>>
 		</li>
 	<% end %>

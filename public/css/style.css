@@ -16,9 +16,15 @@ h1 {
 }
 h2 {
 	margin: 0 0 30px;
+	text-align: center;
 }
 h3 {
 	text-align: center;
+}
+.container-fluid {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 60px;
 }
 .container {
 	text-align: center;
@@ -26,6 +32,7 @@ h3 {
 .inline-movies {
 	list-style: none;
 	margin: 10px;
+	width: 30%;
 }
 .inline-movies img {
 	width: 200px;
@@ -53,7 +60,10 @@ h3 {
 	margin: 0 30px 10px 0;
 	float: left;
 }
-
+.line {
+	margin: 0 auto;
+	text-align: center;
+}
 
 
 

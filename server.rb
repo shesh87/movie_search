@@ -9,7 +9,7 @@ enable :sessions
 
 
 class IMDBSearch
-# attr_accessor :results, :cheese
+attr_accessor :results, :year
 
 	@@results = []
 
@@ -41,10 +41,11 @@ class IMDBSearch
 			movie.poster
 		end
 		return posters
+		# get_year
 	end
 
 	def get_year(array)
-		year = []
+		@year = []
 		puts array
 		array.each do |movie|
 			year << movie.year
@@ -68,21 +69,12 @@ post "/search" do
 	session[:quiz] = IMDBSearch.new
 	results = session[:quiz].search_movies(params[:search_word])
 	session[:quiz].movie_properties(results)
-	binding.pry
-
-	
 	redirect to("/movies")
 end
 
 get "/movies" do
-	@greeting = "HELLO"
 	@movies = session[:quiz].show
-	binding.pry
-	# @year = session[:quiz].get_year(@movies)
-	binding.pry
-	# @movies = quiz2.movie_properties(quiz2.results)
-
-	
+	@year = session[:quiz].get_year(@movies)
 	erb :movies
 end
 
