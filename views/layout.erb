@@ -4,8 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1">
 	<title>IMDB Movie Quiz</title>
-	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css"> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -15,19 +13,23 @@
 
 
 <div class="container">
-	<header>
+	<header class="col-sm-10 header">
+		<div class="col-sm-8 title">
 		<h1>Movie Search Quiz</h1>
+		</div>
+		<img src="/img/movie_quiz_logo2.png" alt="movie quiz logo">
 	</header>
 	
 	<main>
 		<%= yield %>
 	</main>
 
-	<footer class="row">
-		<div class="col-sm-12 footer">
-			<p>Copyright 2015</p>
-		</div>
-	</footer>
+	
+</div>
+
+
+<div class="col-sm-12 footer">
+	<p>Copyright 2015</p>
 </div>
 
 

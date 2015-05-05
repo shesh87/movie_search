@@ -1,17 +1,16 @@
 body {
 	background-color: #FCFAE1;
-	font-size: 16px;
+	font-size: 1em;
 }
-.btn-search {
-	vertical-align: top;
-	float: left;
+img {
+	width: 100%;
 }
 h1 {
 	font-family: 'Fascinate', cursive;
 	margin: 40px 0 60px;
 	color: #D4171A;
 	text-align: center;
-	font-size: 45px;
+	font-size: 3em;
 	letter-spacing: 1px;
 }
 h2 {
@@ -21,13 +20,22 @@ h2 {
 h3 {
 	text-align: center;
 }
-.container-fluid {
-	min-height: 100%;
-	position: relative;
-	padding-bottom: 60px;
+body, html {
+	height: 95%;
+}
+
+.btn-search {
+	vertical-align: top;
+	float: right;
+	width: 18%;
+	margin-left: 2%;
+	box-shadow: 4px 4px 0 #8d2825;
 }
 .container {
+	min-height: 100%;
+	position: relative;
 	text-align: center;
+	margin-top: 3%
 }
 .inline-movies {
 	list-style: none;
@@ -40,13 +48,15 @@ h3 {
 }
 .footer {
 	background-color: #D4171A;
-	width: 100%;
 	height: 40px;
 	text-align: center;
 	color: #fff;
 	padding: 10px 0;
-	position: absolute;
+	border-radius: 6px;
+	position: relative;
 	bottom: 0;
+	margin: 0 auto;
+	float: none;
 }
 .footer p {
 	margin: 0;
@@ -56,13 +66,30 @@ h3 {
 	margin: 0 auto 50px;
 }
 .search {
-	width: 83%;
-	margin: 0 30px 10px 0;
+	width: 80%;
 	float: left;
 }
 .line {
 	margin: 0 auto;
 	text-align: center;
+}
+.header {
+	float: none;
+	margin: 0 auto 50px;
+	overflow: auto;
+}
+.title {
+	position: relative;
+	top: 50px;
+	font-size: 1.5em;
+	float: right;
+	margin: 0 43px 0 0;
+}
+.title h1 {
+	margin: 0;
+}
+.header img {
+	width: 80%;
 }
 
 
