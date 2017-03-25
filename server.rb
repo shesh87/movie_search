@@ -14,20 +14,21 @@ attr_accessor :results, :year
 	@@results = []
 
 	def show
+		# binding.pry
 		@@results[0..8]
 	end
 
 	def search_movies(word)
 		search = Imdb::Search.new(word)
 		return search.movies[0...15]
-		# @@results << search.movies
-		# @@results << "123"
-		# return @@results
+		# return search.movies[0]
+
 	end
 
 	def movie_properties(array)
 		# good_movies = []
 		array.each do |object|
+			binding.pry
 			if object.poster != nil
 				@@results << object
 				# break if @@results == 9 
@@ -68,6 +69,7 @@ end
 post "/search" do
 	session[:quiz] = IMDBSearch.new
 	results = session[:quiz].search_movies(params[:search_word])
+	binding.pry
 	session[:quiz].movie_properties(results)
 	redirect to("/movies")
 end
